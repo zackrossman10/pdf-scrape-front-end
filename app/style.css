@@ -1,0 +1,34 @@
+html,
+body {
+	height: 100%;
+	margin: 0 auto;
+	padding: 0;
+  text-align: center;
+}
+
+#pdfDataForm{
+  vertical-align: top;
+  display: inline-block;
+  width: 30%;
+  margin: 4% 4%;
+}
+
+#pdfDataForm form{
+  text-align: right;
+  margin-right: 5%
+}
+
+.label{
+  margin-right: 3%;
+}
+
+#pdfDataForm input{
+  float: right;
+}
+
+#map {
+  display: inline-block;
+	height: 70%;
+  width: 40%;
+  margin: 4% 4%;
+}
