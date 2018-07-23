@@ -6,29 +6,56 @@ body {
   text-align: center;
 }
 
-#pdfDataForm{
-  vertical-align: top;
-  display: inline-block;
-  width: 30%;
-  margin: 4% 4%;
-}
-
-#pdfDataForm form{
-  text-align: right;
-  margin-right: 5%
-}
-
-.label{
-  margin-right: 3%;
-}
-
-#pdfDataForm input{
-  float: right;
-}
-
 #map {
   display: inline-block;
 	height: 70%;
   width: 40%;
   margin: 4% 4%;
 }
+
+#pdfDataForm{
+  vertical-align: top;
+  display: inline-block;
+  width: 40%;
+  margin: 4% 0;
+}
+
+#pdfDataForm form{
+  text-align: right;
+	margin-right: 23%;
+}
+
+.label{
+  margin-right: 3%;
+}
+
+.term{
+	width: 50%;
+	margin-left: 37%;
+	margin-bottom: 20px;
+}
+
+label{
+	margin-right: 15px;
+}
+
+button{
+	width: 40px;
+	margin: 0 4%;
+}
+
+input{
+	text-align: center;
+}
+
+
+/* input{
+  float: right;
+	width: 50%;
+	margin-right: 20%;
+}
+
+input[type="radio"]{
+	width: 5px;
+	margin-right: 5px;
+} */

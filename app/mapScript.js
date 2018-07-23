@@ -3,6 +3,7 @@ var geocoder = new google.maps.Geocoder();
 var markers = [];
 var contentString = '<h1>This is the Title!</h1>';
 var locations = [];
+var addressInfo = [];
 
 function initialize() {
 	var mapOptions = {
@@ -20,31 +21,43 @@ function initialize() {
 }
 
 function addAddress(){
-	var address = document.getElementById('geocoded_address').value;
-	geocoder.geocode( { 'address': address }, function(results, status) {
+	var address = document.getElementById('address').value;
+	geocoder.geocode({'address': address}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
+				fullAddress = results[0].formatted_address;
+				addressType = results[0].address_components[0].types[0];
 				addrLat = results[0].geometry.location.lat();
 				addrLong = results[0].geometry.location.lng();
-				addLatLong(addrLat, addrLong);
+				addressInfo = [fullAddress, addressType, addrLat, addrLong];
+				addMarker(addressInfo);
 			} else {
 				alert("Could not find location: " + location);
 			}
 	 });
+	 increment();
 }
 
-
-function addLatLong(addrLat, addrLong){
-	addMarker(new google.maps.LatLng(parseFloat(addrLat), parseFloat(addrLong)));
+function removeAddress(){
+	markers.pop();
+	if(markers.length > 0){
+		setBounds();
+	}else {
+		initialize();
+	}
+	decrement();
 }
 
 //Add a property to the map
-function addMarker(location) {
+function addMarker(adddressInfo) {
+	addrLat = addressInfo[2];
+	addrLong = addressInfo[3];
+	addrLocation = new google.maps.LatLng(parseFloat(addrLat), parseFloat(addrLong));
 	var markerOptions = {
-		position: location,
+		position: addrLocation,
 		map: map
 	}
 	var marker = new google.maps.Marker(markerOptions);
-	var contentString = getContentString();
+	var contentString = getContentString(addressInfo[0]);
 	marker.infowindow = new google.maps.InfoWindow({
 		content: contentString
 	});
@@ -59,12 +72,10 @@ function addMarker(location) {
 }
 
 //create html string containing relevant info to be displayed on a property
-function getContentString(){
-	var pdfName = "<p>PDF: <strong>"+document.getElementById('pdfName').value+"</strong></p>";
-	var pdfIndex = "<p>"+document.getElementById('pdfIndex').value+"</p><br>";
-	var address = "<p>Address: "+document.getElementById('geocoded_address').value+"</p>";
-	var addressType = "<p>Type: "+document.getElementById('address_type').value+"</p>";
-	return pdfName+pdfIndex+address+addressType;
+function getContentString(fullAddress){
+	var propertyName = "<p><strong>"+document.getElementById('propName').value+"</strong></p>";
+	var address = "<p>Address: "+fullAddress+"</p>";
+	return propertyName+address;
 }
 
 //fit bounds of map to any number of properties
