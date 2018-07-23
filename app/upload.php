@@ -1,11 +1,8 @@
+<!--page for user to upload PDF files for ingest-->
 <?php
   require 'start.php';
   session_start();
   session_unset();
-
-  foreach($_FILES as $key => $value){
-    print $key;
-  }
 
   if(isset($_FILES['upload'])){
     $total = count($_FILES['upload']['name']);
@@ -34,8 +31,8 @@
  <body>
 
  <form action='upload.php' method='post' enctype='multipart/form-data'>
-     Select a PDF to upload:
-     <input type='file' name='upload[]' multiple="multiple"><br>
+     Select a PDF(s) to upload:
+     <input type='file' name='upload[]' multiple="multiple"><br><br>
      <input type='submit' value='Upload PDF(s)' name='submit'>
  </form>
 

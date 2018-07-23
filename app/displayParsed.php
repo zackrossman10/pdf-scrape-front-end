@@ -1,7 +1,7 @@
+<!--page containing dynamic form and map for adding PDF information-->
 <?php
   require 'start.php';
   session_start();
-  $numUploaded = $_SESSION["numUploaded"];
  ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,6 @@
 	<link href="style.css" rel="stylesheet">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAv1vghEx5gdzH7vHo3OLZTlFB_vm1b7U&v=3.exp"></script>
   <script type="text/javascript" src="mapScript.js"></script>
-  <script type="text/javascript" src="populate.js"></script>
   <?php include "s3Funnel.php";?>
 </head>
 <body>
@@ -37,15 +36,20 @@
         <label for="lease">Lease</label>
       </div>
     </form><br>
-    <button class="nav" onclick='removeAddress()'>Back</button>
-    <button class="nav" onclick='increment()'>Skip</button>
-    <button class="nav" onclick='addAddress()'>Next</button>
+    <div id="nav-buttons">
+      <button class="nav" onclick='removeAddress()'>Back</button>
+      <button class="nav" onclick='increment()'>Skip</button>
+      <button class="nav" onclick='addAddress()'>Next</button>
+    </div>
     <br>
     <div id ="finish">
     </div>
   </div>
   <div class="" id="map"></div>
-  <script> setTotal(<?php echo $numUploaded?>)</script>
-  <script> populate(0)</script>
+  <script>
+    //setup scripts for the first form
+    setTotal(<?php echo $numUploaded?>);
+    autofill(0)
+  </script>
 </body>
 </html>
