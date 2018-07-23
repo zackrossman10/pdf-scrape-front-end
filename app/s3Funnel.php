@@ -7,6 +7,7 @@ for($i =0; $i< $numUploaded; $i++){
   //for each file uploaded...
   $pdfName = $_SESSION["file$i"];
   //...get the corresponding JSON output from S3
+  $s3client->waitUntil('ObjectExists', array('Bucket' => "flyeroutput", 'Key' => $pdfName.".json"));
   $result = $s3client->getObject([
       'Bucket' => "flyeroutput",
       'Key'    => $pdfName.".json"

@@ -46,6 +46,7 @@
     </div>
   </div>
   <div class="" id="map"></div>
+  <div class="" id="active"></div>
   <script>
     //setup scripts for the first form
     setTotal(<?php echo $numUploaded?>);

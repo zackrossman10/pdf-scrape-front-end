@@ -26,15 +26,16 @@
   }
 
 ?>
- <!DOCTYPE html>
- <html>
- <body>
-
- <form action='upload.php' method='post' enctype='multipart/form-data'>
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <form id="upload" action='upload.php' method='post' enctype='multipart/form-data'>
      Select a PDF(s) to upload:
      <input type='file' name='upload[]' multiple="multiple"><br><br>
      <input type='submit' value='Upload PDF(s)' name='submit'>
- </form>
-
- </body>
- </html>
+  </form>
+</body>
+</html>

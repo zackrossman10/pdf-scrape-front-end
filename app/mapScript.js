@@ -28,7 +28,7 @@ function initialize() {
 		mapTypeControlOptions: google.maps.MapTypeId.SATELLITE
 	};
 	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	geocoder.geocode( { 'address': "222 W Avenida Valencia" }, function(results, status) {
+	geocoder.geocode( { 'address': "United States" }, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			map.setCenter(results[0].geometry.location);
 		} else {
@@ -118,7 +118,7 @@ function addAddress(){
 function addToMap(address){
 	geocoder.geocode({'address': address}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
-				activeCounter ++;
+				activeCounter++;
 				var fullAddress = results[0].formatted_address;
 				var addressType = results[0].address_components[0].types[0];
 				var addrLat = results[0].geometry.location.lat();
@@ -130,14 +130,13 @@ function addToMap(address){
 	 });
 }
 
-
 //move to the next PDF (or give option to finish once all PDFs have been processed)
 function increment(){
   counter += 1;
   if(counter<total){
     autofill(counter);
   }else{
-    document.getElementById('finish').innerHTML = "<button class='nav' onclick='finish()'>Finish</button>";
+    document.getElementById('finish').innerHTML = "<button class='nav' onclick='finish()'>Done</button>";
     document.getElementById('nav-buttons').innerHTML = "<button class='nav' onclick='removeAddress()'>Back</button>";
   }
 }
@@ -145,13 +144,18 @@ function increment(){
 //remove an address from the map
 function removeAddress(){
 	if(activeCounter >0){
+    activeCounter--;
 		if(markers[counter] != null){
 			markers[counter].setMap(null);
 			markers[counter] = null;
-			setBounds();
+      if(activeCounter ==0){
+        //if no active markers anymore, reinitialize the map
+        initialize();
+      }else{
+        //otherwise, reset the bounds to fit previous list of properties
+        setBounds();
+      }
 		}
-	}else {
-		initialize();
 	}
 	decrement();
 }
